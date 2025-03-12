@@ -8,109 +8,73 @@ import java.util.Scanner;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        List<Producto> productos = new ArrayList<>();
-        Producto pro1 = new Producto();
-        Scanner scn = new Scanner(System.in);
-        Scanner scn2 = new Scanner(System.in);
-        int opcion1;
+
+        List<Cabina> cabinas = new ArrayList<>();
+
+        Scanner scn1 = new Scanner(System.in);
+        short opcion1, opcion2;
 
         do {
-            do {
-                System.out.println("\n\n\tMenu principal\n\n1)Crear producto\n2)Vender producto\n3)Reponer stock\n4)Aplicar descuento\n5)Aplicar aumento\n6)Mostrar lista\n7)Calcular total\n8)Eliminar producto");
-                System.out.print("Digite la opcion: ");
-                opcion1 = scn.nextInt();
-            } while(opcion1<=0 || opcion1>8);
+            System.out.println("\n\n\tMenú principal");
+            System.out.print("\n\n1) Crear cabina\n2) Escoger cabina\n3) Mostrar info por cabina\n4) Mostrar consolidado\n5) Reiniciar cabina\nDigite opcion:");
+            opcion1 = scn1.nextShort();
+
             switch(opcion1) {
                 case 1:
-                    String nombre;
-                    double precio;
-                    int cantidad;
-                    System.out.print("\n\nIngrese el nombre:");
-                    //pro1.setNombre(scn.next());
-                    nombre = scn2.next();
-                    System.out.println();
-                    System.out.print("Ingrese el precio:");
-                    //pro1.setPrecio(scn.nextDouble());
-                    precio = scn.nextDouble();
-                    System.out.println();
-                    System.out.print("Ingrese la cantidad:");
-                    //pro1.setCantidad(scn.nextInt());
-                    cantidad = scn.nextInt();
-                    System.out.println();
-                    //pro1.setCodigo(productos.toArray().length);
-
-                    productos.add(Producto.crearProducto(productos.toArray().length, nombre, precio, cantidad));
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
+                    int codigo = cabinas.toArray().length;
+                    System.out.println("\n\n\tCrear cabina");
+                    cabinas.add(Cabina.crearCabina(codigo));
+                    System.out.println("\n\nCabina creada:");
+                    cabinas.get(codigo).mostrarUnaCabina();
                     break;
                 case 2:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    int codigo;
-                    System.out.print("\n\nIngrese el codigo de producto que desea vender:");
-                    codigo = scn.nextInt();
+                    System.out.println("\n\n\tRegistrar llamada");
+                    System.out.println("\n\nLista de cabinas disponibles:");
+                    //Cabina.mostrarTodasCabinas(cabinas);
+                    for(int i=0; i<cabinas.toArray().length; i++){
+                        System.out.println("Codigo: "+i);
+                    }
+                    System.out.print("\n\nDigite el codigo de la cabina por usar: ");
+                    opcion1 = scn1.nextShort();
+                    System.out.print("\n\nTipo de llamada:\n1) Local\n2) Distancia \n3) Celular\nDigite opcion: ");
+                    opcion2 = scn1.nextShort();
                     System.out.println();
-                    System.out.println("Ingrese la cantidad a vender:");
-                    productos.get(codigo).venderProducto(scn.nextInt());
-                    System.out.println();
+                    cabinas.get(opcion1).hacerLlamada(opcion2);
+                    cabinas.get(opcion1).mostrarUnaCabina();
                     break;
                 case 3:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    codigo = 0;
-                    System.out.print("\n\nIngrese el codigo de producto que desea reabastecer:");
-                    codigo = scn.nextInt();
+                    System.out.println("\n\n\tMostrar datos de cabina");
+                    System.out.println("\n\nLista de cabinas disponibles:");
+                    //Cabina.mostrarTodasCabinas(cabinas);
+                    for(int i=0; i<cabinas.toArray().length; i++){
+                        System.out.println("Codigo: "+i);
+                    }
+                    System.out.print("\n\nDigite el codigo de la cabina: ");
+                    opcion1 = scn1.nextShort();
                     System.out.println();
-                    System.out.println("Ingrese la cantidad a reabastecer:");
-                    productos.get(codigo).reponerStock(scn.nextInt());
-                    System.out.println();
+                    System.out.print("\n\nDatos de la cabina: ");
+                    cabinas.get(opcion1).mostrarUnaCabina();
                     break;
                 case 4:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    codigo = 0;
-                    System.out.print("\n\nIngrese el codigo de producto que desea aplicar descuento:");
-                    codigo = scn.nextInt();
-                    System.out.println();
-                    System.out.println("Ingrese el porcentaje:");
-                    productos.get(codigo).aplicarDescuento(scn.nextInt());
-                    System.out.println();
+                    System.out.println("\n\n\tConsolidado de cabinas");
+                    Cabina.consolidadoCabinas(cabinas);
                     break;
                 case 5:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    codigo = 0;
-                    System.out.print("\n\nIngrese el codigo de producto que desea aplicar aumento:");
-                    codigo = scn.nextInt();
+                    System.out.println("\n\n\tReiniciar cabina");
+                    System.out.println("\n\nLista de cabinas disponibles:");
+                    //Cabina.mostrarTodasCabinas(cabinas);
+                    for(int i=0; i<cabinas.toArray().length; i++){
+                        System.out.println("Codigo: "+i);
+                    }
+                    System.out.print("\n\nDigite el codigo de la cabina a reiniciar: ");
+                    opcion1 = scn1.nextShort();
                     System.out.println();
-                    System.out.println("Ingrese el porcentaje:");
-                    productos.get(codigo).aplicarAumento(scn.nextInt());
-                    System.out.println();
-                    break;
-                case 6:
-                    Producto.mostrarLista(productos);
-                    break;
-                case 7:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    codigo = 0;
-                    System.out.print("\n\nIngrese el codigo de producto que desea conocer el total:");
-                    codigo = scn.nextInt();
-                    System.out.println();
-                    productos.get(codigo).calcularTotal();
-                    System.out.println();
-                    break;
-                case 8:
-                    System.out.println("\n\n\tLista actual");
-                    Producto.mostrarLista(productos);
-                    codigo = 0;
-                    System.out.print("\n\nIngrese el codigo de producto que desea eliminar:");
-                    codigo = scn.nextInt();
-                    Producto.eliminarProducto(productos, codigo);
-                    break;
+                    cabinas.get(opcion1).reiniciarCabina();
+                    System.out.println("\n\nCabina reiniciada:");
+                    cabinas.get(opcion1).mostrarUnaCabina();
             }
 
-        } while(true);
+        }while(true);
 
     }
 }
