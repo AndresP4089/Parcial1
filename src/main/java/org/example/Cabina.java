@@ -47,4 +47,11 @@ public class Cabina {
         llamadas.reiniciarDatos();
     }
 
+    public static List<Cabina> reiniciarTodasCabinas(List<Cabina> cabinas) {
+        for(Cabina cabina: cabinas) {
+            cabina.reiniciarCabina();
+        }
+        return cabinas;
+    }
+
 }

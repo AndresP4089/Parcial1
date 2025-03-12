@@ -58,20 +58,36 @@ public class Main {
                 case 4:
                     System.out.println("\n\n\tConsolidado de cabinas");
                     Cabina.consolidadoCabinas(cabinas);
+                    Cabina.mostrarTodasCabinas(cabinas);
                     break;
                 case 5:
                     System.out.println("\n\n\tReiniciar cabina");
-                    System.out.println("\n\nLista de cabinas disponibles:");
-                    //Cabina.mostrarTodasCabinas(cabinas);
-                    for(int i=0; i<cabinas.toArray().length; i++){
-                        System.out.println("Codigo: "+i);
-                    }
-                    System.out.print("\n\nDigite el codigo de la cabina a reiniciar: ");
-                    opcion1 = scn1.nextShort();
+                    System.out.print("\n\n1) Reiniciar una cabina\n2) Reiniciar todas las cabinas\nDigite opcion: ");
+                    opcion2 = scn1.nextShort();
                     System.out.println();
-                    cabinas.get(opcion1).reiniciarCabina();
-                    System.out.println("\n\nCabina reiniciada:");
-                    cabinas.get(opcion1).mostrarUnaCabina();
+                    switch (opcion2) {
+                        case 1:
+                            System.out.println("\n\nLista de cabinas disponibles:");
+                            //Cabina.mostrarTodasCabinas(cabinas);
+                            for(int i=0; i<cabinas.toArray().length; i++){
+                                System.out.println("Codigo: "+i);
+                            }
+                            System.out.print("\n\nDigite el codigo de la cabina a reiniciar: ");
+                            opcion1 = scn1.nextShort();
+                            System.out.println();
+                            cabinas.get(opcion1).reiniciarCabina();
+                            System.out.println("\n\nCabina reiniciada:");
+                            cabinas.get(opcion1).mostrarUnaCabina();
+                            break;
+                        case 2:
+                            cabinas = Cabina.reiniciarTodasCabinas(cabinas);
+                            System.out.println("\n\nCabinas reiniciadas");
+                            Cabina.mostrarTodasCabinas(cabinas);
+                            break;
+                    }
+                    break;
+                default:
+                    System.out.println("Eliga una opcion valida.");
             }
 
         }while(true);
